@@ -36,6 +36,7 @@ class ZefyrEditableText extends StatefulWidget {
     @required this.controller,
     @required this.focusNode,
     @required this.imageDelegate,
+    this.expandable = false,
     this.selectionControls,
     this.autofocus = true,
     this.mode = ZefyrMode.edit,
@@ -54,6 +55,8 @@ class ZefyrEditableText extends StatefulWidget {
   /// Controls whether this editor has keyboard focus.
   final FocusNode focusNode;
   final ZefyrImageDelegate imageDelegate;
+
+  final bool expandable;
 
   /// Whether this text field should focus itself if nothing else is already
   /// focused.
@@ -151,6 +154,21 @@ class _ZefyrEditableTextState extends State<ZefyrEditableText>
     Widget body = ListBody(children: _buildChildren(context));
     if (widget.padding != null) {
       body = Padding(padding: widget.padding, child: body);
+    }
+
+    if (widget.expandable == true) {
+      return Stack(fit: StackFit.passthrough, children: [
+        body,
+        Positioned.fill(
+            left: 0,
+            right: 0,
+            bottom: 0,
+            top: 0,
+            child: ZefyrSelectionOverlay(
+              controls:
+              widget.selectionControls ?? defaultSelectionControls(context),
+            ))
+      ]);
     }
 
     body = SingleChildScrollView(
