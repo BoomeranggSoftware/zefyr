@@ -6,6 +6,7 @@ import 'dart:ui' as ui;
 
 import 'package:flutter/material.dart';
 import 'package:notus/notus.dart';
+import 'package:zefyr/src/widgets/scaffold.dart';
 
 import 'buttons.dart';
 import 'scope.dart';
@@ -105,13 +106,11 @@ class ZefyrToolbar extends StatefulWidget implements PreferredSizeWidget {
     Key key,
     @required this.editor,
     this.autoHide = true,
-    this.trailingWidget,
     this.delegate,
   }) : super(key: key);
 
   final ZefyrToolbarDelegate delegate;
   final ZefyrScope editor;
-  final Widget trailingWidget;
 
   /// Whether to automatically hide this toolbar when editor loses focus.
   final bool autoHide;
@@ -226,7 +225,7 @@ class ZefyrToolbarState extends State<ZefyrToolbar>
       key: _toolbarKey,
       body: ZefyrButtonList(buttons: _buildButtons(context)),
       trailing: Row(children: [
-        widget.trailingWidget ?? Container(),
+        ZefyrScaffold.of(context).widget.trailingChild ?? Container(),
         buildButton(context, ZefyrToolbarAction.hideKeyboard)
       ],),
     );
