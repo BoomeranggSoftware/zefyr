@@ -105,11 +105,13 @@ class ZefyrToolbar extends StatefulWidget implements PreferredSizeWidget {
     Key key,
     @required this.editor,
     this.autoHide = true,
+    this.trailingWidget,
     this.delegate,
   }) : super(key: key);
 
   final ZefyrToolbarDelegate delegate;
   final ZefyrScope editor;
+  final Widget trailingWidget;
 
   /// Whether to automatically hide this toolbar when editor loses focus.
   final bool autoHide;
@@ -223,7 +225,10 @@ class ZefyrToolbarState extends State<ZefyrToolbar>
     final toolbar = ZefyrToolbarScaffold(
       key: _toolbarKey,
       body: ZefyrButtonList(buttons: _buildButtons(context)),
-      trailing: buildButton(context, ZefyrToolbarAction.hideKeyboard),
+      trailing: Row(children: [
+        widget.trailingWidget ?? Container(),
+        buildButton(context, ZefyrToolbarAction.hideKeyboard)
+      ],),
     );
 
     layers.add(toolbar);

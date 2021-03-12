@@ -5,8 +5,9 @@ import 'editor.dart';
 /// Provides necessary layout for [ZefyrEditor].
 class ZefyrScaffold extends StatefulWidget {
   final Widget child;
+  final Widget trailingChild;
 
-  const ZefyrScaffold({Key key, this.child}) : super(key: key);
+  const ZefyrScaffold({Key key, this.child, this.trailingChild}) : super(key: key);
 
   static ZefyrScaffoldState of(BuildContext context) {
     final widget =

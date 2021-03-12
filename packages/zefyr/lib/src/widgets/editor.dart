@@ -110,6 +110,7 @@ class _ZefyrEditorState extends State<ZefyrEditor> {
       data: _themeData,
       child: ZefyrToolbar(
         key: _toolbarKey,
+        trailingWidget: _toolbarKey.currentState.widget.trailingWidget,
         editor: _scope,
         delegate: widget.toolbarDelegate,
       ),
